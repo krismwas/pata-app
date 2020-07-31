@@ -17,7 +17,7 @@ before_script: pip install docker-compose
 
 script:
 #  - docker-compose -f docker-compose.prod.yml run hospital sh -c "python manage.py test && flake8"
-  - docker-compose -f docker-compose.travis.yml run hospital sh -c "python manage.py test"
+  - docker-compose -f docker-compose.travis.yml run pata sh -c "python manage.py test"
   - sh before_script_linux.sh
 
 
