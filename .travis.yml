@@ -1,0 +1,24 @@
+language: python
+
+python:
+  - "3.6"
+
+os: linux
+
+addons:
+  apt:
+    packages:
+      - pass
+
+services:
+  - docker
+
+before_script: pip install docker-compose
+
+script:
+#  - docker-compose -f docker-compose.prod.yml run hospital sh -c "python manage.py test && flake8"
+  - docker-compose -f docker-compose.travis.yml run hospital sh -c "python manage.py test && flake8"
+  - sh before_script_linux.sh
+
+
+
