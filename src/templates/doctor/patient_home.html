@@ -1,0 +1,276 @@
+
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block searching %}
+
+{% endblock searching %}
+
+{% block content %}
+    <div class="container kontent">
+        <div class="row">
+            <div class="col-md-4">
+                <table class="table table-striped">
+                    <tr>
+                        <th>username</th>
+                        <td>{{ patient_obj.username }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_username_ajax' %}">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="username" value="{{  patient_obj.username }}" maxlength="150">
+                                    </div>
+                                    <input type="submit" value="save" class="btn pull-right" id="patient_username">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>email</th>
+                        <td>{{ patient_obj.email }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_email_ajax' %}">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="email" value="{{ patient_obj.email }}" maxlength="254">
+                                    </div>
+                                    <input type="submit" value="save" class="btn pull-right" id="btnemail">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <th>first name</th>
+                        <td>{{ patient_obj.first_name }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_fname_ajax' %}">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="first_name" value="{{ patient_obj.first_name }}" maxlength="30">
+                                    </div>
+                                    <input type="submit" value="save" class="btn" id="btnfirst_name">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                     <tr>
+                        <th>last name</th>
+                        <td>{{ patient_obj.last_name }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_lname_ajax' %}">
+                                    <div class="form-group">
+                                         <input type="text" class="form-control" name="last_name" value="{{ patient_obj.last_name }}" maxlength="30">
+                                    </div>
+                                    <input type="submit" value="save" class="btn" id="last_name">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>mobile</th>
+                        <td>{{ patient_obj.profile.mobile_no }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_mobile_no_ajax' %}">
+                                    <div class="form-group">
+                                        <input name="mobile_no" type="text" class="form-control" maxlength="15">
+{#                                            <input id="datepicker" type="text" class="form-control" name="dob" value="{{  patient_obj.profile.birth_date }}">#}
+                                    </div>
+                                    <input type="submit" value="save" class="btn" id="mobileno">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th>DOB</th>
+                        <td>{{ patient_obj.profile.birth_date }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <div class="basic-info">
+                                <form data-url="{% url 'doctor:patient_dob_ajax' %}">
+                                    <div class="form-group">
+                                        <input id="datepicker" type="text" class="form-control" name="dob">
+{#                                            <input id="datepicker" type="text" class="form-control" name="dob" value="{{  patient_obj.profile.birth_date }}">#}
+                                    </div>
+                                    <input type="submit" value="save" class="btn" id="patient_dob">
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+            </div><!--  end of col  -->
+
+            <div class="col-md-8">
+                         <!-- start of accordion -->
+                <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                        <!--- -->
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingThree">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                         Future appointments
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                      <div class="panel-body">
+
+                        <div class="row">
+                        <div class="col-md-offset-1 col-md-10">
+                        {% if future_dr_appointments.exists %}
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <th>Doctor name</th>
+                                        <th>Mobile number</th>
+                                        <th>Appointment date</th>
+                                    </thead>
+                                {% for instance in future_dr_appointments %}
+                                    <tr>
+                                        {% for dr in instance.doctor.all %}
+                                            <td><a href="{{ dr.profile.get_absolute_url }}">Dr. {{ dr.get_full_name }}</a></td>
+                                            <td>{{ dr.profile.mobile_no }}</td>
+                                        {% endfor %}
+                                            <td>{{ instance.appointment_datee }}</td>
+                                    </tr>
+                                {% endfor %}
+                                </table>
+                            </div>
+                        {% else %}
+                              <h4>No future appointments yet !!</h4>
+                        {% endif %}
+                        </div>
+                     </div>
+
+                      </div>
+                    </div>
+                  </div>
+                    <!--- -->
+
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingOne">
+                      <h4 class="panel-title">
+                        <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                          Today's appointments
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                      <div class="panel-body">
+                         <div class="row">
+                            <div class="col-md-offset-1 col-md-10">
+                            {% if today_dr_appointments.exists %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>Doctor name</th>
+                                            <th>Mobile number</th>
+                                            <th>Appointment date</th>
+                                        </thead>
+                                    {% for instance in today_dr_appointments %}
+                                        <tr>
+                                            {% for dr in instance.doctor.all %}
+                                                <td><a href="{{ dr.profile.get_absolute_url }}">Dr. {{ dr.get_full_name }}</a></td>
+                                                <td>{{ dr.profile.mobile_no }}</td>
+                                            {% endfor %}
+                                            <td>{{ instance.appointment_datee }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </table>
+                                </div>
+                            {% else %}
+                                  <h4>No appointments yet !!</h4>
+                            {% endif %}
+                            </div>
+                         </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="headingTwo">
+                      <h4 class="panel-title">
+                        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                          Previous appointments
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                      <div class="panel-body">
+                                  <div class="row">
+                            <div class="col-md-10 col-md-offset-1">
+
+                            {% if doc_appointments.exists %}
+                                <div class="table-responsive">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <th>Doctor name</th>
+                                            <th>Mobile number</th>
+                                            <th>Appointment date</th>
+                                        </thead>
+
+                                        {% for doc in doc_appointments %}
+                                            <tr>
+                                                {% for dr in doc.doctor.all %}
+                                                    <td><a href="{{ dr.profile.get_absolute_url }}">Dr. {{ dr.get_full_name }}</a></td>
+                                                    <td>{{ dr.profile.mobile_no }}</td>
+                                                {% endfor %}
+                                                    <td>{{ doc.appointment_datee }}</td>
+                                            </tr>
+                                        {% endfor %}
+                                    </table>
+                                </div>
+                            {% else %}
+                                <h4>No previous appointments yet !!</h4>
+                            {% endif %}
+
+                            </div>
+                                 <div class="col-md-6">
+                            </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div> <!-- end of accordion -->
+
+            </div><!-- end of col -->
+
+        </div> <!-- end of row -->
+    </div>
+
+{% endblock content %}
+
+
+{% block jquery %}
+
+    <script src="{% static 'js/my/others/patient_home.js' %}"></script>
+
+{% endblock jquery %}
+
+

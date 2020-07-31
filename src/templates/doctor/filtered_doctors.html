@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% load get_thumbnails %}
+
+{% block meta_description %}
+    Hekimadoctors is a directory for medical professionals in kenya. This is to make it easy for ordinary kenyans to
+    find doctors and clinics in a quick and easy way. In our listings we have dentists, gynecologists etc
+{% endblock meta_description %}
+
+{% block title %}
+    Hekimadoctors is kenya medical doctors directory, for {{ specialty_entered }}s, in
+    {{ location_entered }}
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container kontent">
+{#          <div class="kontent">#}
+
+    {% for dok in doctors %}
+
+
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1 col-sm-2 col-sm-offset-1 col-xs-5">
+                {% if dok.profile.photo %}
+                    <a href="{{ dok.profile.profile_pics_sd }}"><img class="filtered_doctor_images img-responsive" src="{{ dok.profile.profile_pics_micro }}"></a>
+                {% else %}
+                    <img src="http://via.placeholder.com/180x180" class="img-responsive img-rounded" alt="Responsive image">
+                {% endif %}
+            </div>
+            <div class="col-md-6 col-sm-6 col-xs-7 filtered_doctors_xs">
+                <span><a href='{{ dok.profile.get_absolute_url }}'><span class="lead">Dr {{ dok.get_full_name }}</span></a></span><br>
+                <div class="star-ratings" id="filtered_doc_image">
+                    <div class="fill-ratings" style="width: {{ dok.profile.doc_obj_average_rating.rating_value__avg }}%;">
+                        <span>★★★★★</span>
+                    </div>
+                    <div class="empty-ratings">
+                        <span>★★★★★</span>
+                    </div>
+                </div>
+
+                <span> {{ dok.email }}</span><br>
+                <span> {%  for instance in dok.specialty_set.all %}{{ instance }},&nbsp{% endfor %}</span><br>
+                <span> {{ dok.doc_rated.count }} reviews</span><br>
+
+            </div>
+
+            <div class="col-md-2 col-sm-2 hidden-xs">
+                <a href="{% url 'doctor:detail' pk=dok.id %}" class="btn btn-primary btn-block" role="button">Review</a>
+                <br>
+                <a href="{% url 'book_appointment:bappointment' id=dok.id %}" class="btn btn-default btn-block" role="button">Book appointment</a>
+            </div>
+
+        </div><!-- end of row -->
+
+        <hr>
+    {% empty %}
+        <p>No doctors yet</p>
+    {% endfor %}
+
+{#        </div>#}
+
+    </div>
+
+{% endblock content %}
+
+{% block jquery %}
+
+    <script src="{% static 'js/my/others/filtered_doctors.js' %}"></script>
+
+{% endblock jquery %}

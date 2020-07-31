@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block searching %}
+{% endblock searching %}
+
+{% block content %}
+
+    <div class="container kontent">
+        <div class="row">
+
+            {% for instance in clinic_photos %}
+                <div class="col-xs-12 col-md-3">
+                    <a href="{{ instance.clinic_photos_thumbnails_sd }}" class="thumbnail">
+                        <img src="{{ instance.clinic_photos_thumbnails_micro }}" alt="...">
+                    </a>
+                </div>
+            {% empty %}
+                <p class="lead">no clinic photos yet !!</p>
+            {% endfor %}
+
+        </div>
+
+{#        {% for instance in clinic_photos %}#}
+{#            <img class="img-thumbnail img-responsive" src="{{ instance.clinic_photos_thumbnails_micro }}" >#}
+{#        {% empty %}#}
+{#            <p class="lead">no clinic photos yet !!</p>#}
+{#        {% endfor %}#}
+    </div>
+
+{% endblock content %}

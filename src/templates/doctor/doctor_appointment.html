@@ -1,0 +1,180 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block searching %}
+
+{% endblock searching %}
+
+{% block content %}
+
+    <div class="container kontent">
+            <!-- start of accordion -->
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+        <!--- -->
+         <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingThree">
+      <h4 class="panel-title">
+        <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+         Future appointments
+        </a>
+      </h4>
+    </div>
+    <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+      <div class="panel-body">
+
+        <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+        {% if future_dr_appointments.exists %}
+            <div class="table-responsive">
+                <table class="table table-striped table-condensed">
+                    <thead>
+                        <th>Patient_name</th>
+                        <th>Appointment date</th>
+                        <th>Mobile number</th>
+                        <th>Verify</th>
+                    </thead>
+                {% for instance in future_dr_appointments %}
+                    <tr>
+                        <td>{{ instance.patient.get_full_name }}</td>
+                        <td>{{ instance.appointment_datee }}</td>
+                        <td>{{ instance.patient.profile.mobile_no }}</td>
+{#                        <td class="doc{{ doc.patient.id }}">#}
+                        <td>
+                            {% if not instance.patient.doc_patients.all %}
+                                <button data-url="{% url 'doctor:patient_verification' %}" data-toggle="tooltip" title="This will verify a patient as your patient"
+                                        type="button" class="verify btn btn-success" value="{{ instance.patient.id }}">verify</button>
+                            {% endif %}
+                         </td>
+                    </tr>
+                {% endfor %}
+                </table>
+            </div>
+        {% else %}
+              <h4>No future appointments yet !!</h4>
+        {% endif %}
+        </div>
+     </div>
+
+      </div>
+    </div>
+  </div>
+        <!--- -->
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              Today's appointments
+            </a>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+             <div class="row">
+                <div class="col-md-offset-1 col-md-10">
+                {% if today_dr_appointments.exists %}
+                    <div class="table-responsive">
+                        <table class="table table-striped table-condensed">
+                            <thead>
+                                <th>Patient_name</th>
+                                <th>Appointment date</th>
+                                <th>Mobile number</th>
+                                <th>Verify</th>
+                            </thead>
+                        {% for instance in today_dr_appointments %}
+                            <tr>
+                                <td>{{ instance.patient.get_full_name }}</td>
+                                <td>{{ instance.appointment_datee }}</td>
+                                <td>{{ instance.patient.profile.mobile_no }}</td>
+{#                                    <td class="doc{{ doc.patient.id }}">#}
+                                <td>
+                                    {% if not instance.patient.doc_patients.all %}
+{#                                            <button data-toggle="tooltip" title="This will verify a patient as your patient" id="{{ doc.patient.id  }}"#}
+{#                                                    type="button" class="verify btn btn-success" value="{{ doc.patient.id }}">verify</button>#}
+
+                                        <button data-url="{% url 'doctor:patient_verification' %}" data-toggle="tooltip" title="This will verify a patient as your patient"
+                                                type="button" class="verify btn btn-success" value="{{ instance.patient.id }}">verify</button>
+                                    {% endif %}
+                                 </td>
+                            </tr>
+                        {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                      <h4>No appointments yet !!</h4>
+                {% endif %}
+                </div>
+             </div>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading" role="tab" id="headingTwo">
+          <h4 class="panel-title">
+            <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              Previous appointments
+            </a>
+          </h4>
+        </div>
+        <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+                      <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+
+                {% if doc_appointments.exists %}
+{#                        <h3>My appointments</h3>#}
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <thead>
+                                <th>Patient_name</th>
+                                <th>Appointment date</th>
+                                <th>Mobile number</th>
+                                <th>Verify</th>
+                            </thead>
+
+                            {% for doc in doc_appointments %}
+                                <tr>
+                                    <td>{{ doc.patient.get_full_name }}</td>
+                                    <td>{{ doc.appointment_datee }}</td>
+        {#                            <td>{{ doc.timestamp }}</td>#}
+                                    <td>{{ doc.patient.profile.mobile_no }}</td>
+{#                                         <td class="doc{{ doc.patient.id }}">#}
+                                     <td>
+                                        {% if not doc.patient.doc_patients.all %}
+                                            <button data-url="{% url 'doctor:patient_verification' %}" data-toggle="tooltip" title="This will verify a patient as your patient"
+                                                    type="button" class="verify btn btn-success" value="{{ doc.patient.id }}">verify</button>
+                                        {% endif %}
+                                     </td>
+                                </tr>
+
+                            {% endfor %}
+                        </table>
+                    </div>
+                {% else %}
+                    <h4>No previous appointments yet !!</h4>
+                {% endif %}
+
+                </div>
+                     <div class="col-md-6">
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+            <!-- end of accordion -->
+    </div>
+{% endblock content %}
+
+
+{% block jquery %}
+{#         $('[data-toggle="tooltip"]').tooltip();#}
+{#        {{ block.super }}#}
+    <script src="{% static 'js/my/others/doctor_appointment.js' %}"></script>
+
+{% endblock jquery %}

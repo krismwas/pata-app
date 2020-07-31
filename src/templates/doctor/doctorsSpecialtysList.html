@@ -1,0 +1,15 @@
+<form action="" method="post" data-url="{% url 'doctor:doctors_specitys_ajax' %}">
+       <div class="form-group">
+            <ul>
+                <li>please not unchecking means you dont practice that speciaty</li>
+            </ul>
+            <label for="specialty_all">Your specialtys:</label>
+            <select class="form-control" id="your_specialtys" multiple="multiple">
+{#                <option disabled>select specialty</option>#}
+                {% for instance in doc_specialtys %}
+                    <option selected>{{ instance }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <input type="submit" value="Save" class="btn-default btn" id="your_specialty">
+</form>

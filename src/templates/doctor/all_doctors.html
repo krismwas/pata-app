@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}Doctors{% endblock title %}
+
+{% block content %}
+    <div class="container">
+        <div class="kontent">
+        {% for dok in object_list %}
+
+                <div class="row">
+
+
+                    <div class="col-md-10 col-md-offset-1">
+                        <div class="col-md-2">
+                             {% if dok.profile.dr_profile_pic %}
+                                <img src="{{ dok.profile.dr_profile_pic.url }}" alt="..." class="img-circle images-doctors">
+                             {% endif %}
+                        </div>
+
+                        <div class="col-md-7">
+                            <span><a href='{{ dok.get_absolute_url }}'>{{ dok.get_full_name }}</a></span><br>
+                            <span> {{ dok.id }}</span><br>
+                            <span> {{ dok.email }}</span><br>
+                            <span> {{ dok.profile.specialty }}</span><br>
+                            <span> {{ dok.profile.reviewss.count }} reviews</span><br>
+
+                        </div>
+
+                        <div class="col-md-3">
+                            <a href="#" class="btn btn-primary btn-block" role="button">Revddddddiew</a>
+                            <br>
+                            <a href="#" class="btn btn-default btn-block" role="button">Button</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <hr>
+
+        {% endfor %}
+        </div>
+
+
+    </div><!-- end class containter  -->
+
+{% endblock content %}
+

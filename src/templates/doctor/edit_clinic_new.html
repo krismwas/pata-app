@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block searching %}
+
+{% endblock searching %}
+
+{% block content %}
+    <div class="container kontent">
+        <div class="row">
+            <div class="col-md-offset-2 col-md-8">
+                <h3>edit clinic</h3>
+                <hr>
+                <form method="post" action="">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <input type="submit" value="save" class="btn btn-default">
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,79 @@
+
+<table class="table table-striped">
+    <tr>
+        <th>Education</th>
+        <td>{{ doc_obj.profile.education }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="basic-info">
+                <form data-url="{% url 'doctor:professional_education_ajax'%}">
+                    <div class="form-group">
+{#                        <label for="professinal_biography">education:</label>#}
+                        <textarea class="form-control" rows="3" cols="200" name="edu" maxlength="500">{{ doc_obj.profile.education }}</textarea>
+                    </div>
+                    <input type="submit" value="save" class="btn" id="professional_education">
+                </form>
+            </div>
+        </td>
+    </tr>
+
+     <tr>
+        <th>professional membeship</th>
+        <td>{{ doc_obj.profile.professional_membership }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="basic-info">
+                <form data-url="{% url 'doctor:professional_membership_ajax'%}">
+                    <div class="form-group">
+{#                        <label for="professinal_biography">education:</label>#}
+                        <textarea class="form-control" rows="3" cols="200" name="pmembership" maxlength="500">{{ doc_obj.profile.professional_membership }}</textarea>
+                    </div>
+                    <input type="submit" value="save" class="btn" id="p_membership">
+                </form>
+            </div>
+        </td>
+    </tr>
+
+     <tr>
+        <th>board certifications</th>
+        <td>{{ doc_obj.profile.board_certifications }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="basic-info">
+                <form data-url="{% url 'doctor:bcertifications_ajax'%}">
+                    <div class="form-group">
+{#                        <label for="professinal_biography">education:</label>#}
+                        <textarea class="form-control" rows="3" cols="200" name="bcertification" maxlength="500">{{ doc_obj.profile.board_certifications }}</textarea>
+                    </div>
+                    <input type="submit" value="save" class="btn" id="board_certification">
+                </form>
+            </div>
+        </td>
+    </tr>
+
+    <tr>
+        <th>professional awards</th>
+        <td>{{ doc_obj.profile.professional_awards }}&nbsp;<button align="left" type="button" class="btn probackground pull-right">edit</button></td>
+    </tr>
+    <tr>
+        <td></td>
+        <td>
+            <div class="basic-info">
+                <form data-url="{% url 'doctor:professional_award_ajax'%}">
+                    <div class="form-group">
+{#                        <label for="professinal_biography">education:</label>#}
+                        <textarea class="form-control" rows="3" cols="200" name="pawards" maxlength="500">{{ doc_obj.profile.professional_awards }}</textarea>
+                    </div>
+                    <input type="submit" value="save" class="btn btn-default" id="professinal_awards">
+                </form>
+            </div>
+        </td>
+    </tr>
+
+</table>

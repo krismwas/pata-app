@@ -1,0 +1,22 @@
+
+        <h3>Professional biography</h3>
+            {% if doc_obj.profile.professional_biography %}<br>
+                <p>{{ doc_obj.profile.professional_biography }}</p>
+            {% else %}
+                <p>You have not written your professional biography !!</p>
+            {% endif %}
+            <button type="button" class="btn" id="probio">edit</button>
+
+        <div class="basic-info">
+            <form data-url="{% url 'doctor:professinal_bio'%}" class="biography">
+                <div class="form-group">
+                    <label for="professinal_biography">Professional biography:</label>
+                    <textarea class="form-control" rows="5" name="professinal_biography" maxlength="1500">{{ doc_obj.profile.professional_biography }}</textarea>
+                </div>
+{#                <button type="button" class="btn btnProfileUpdate">Save</button>#}
+                <input type="submit" value="save" class="btn p_bg">
+            </form>
+{#                    <input class="form-control" type="text" name="fname" value="{{ doc_obj.first_name }}" required>#}
+
+        </div>
+

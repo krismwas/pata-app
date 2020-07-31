@@ -1,0 +1,139 @@
+
+<div class="table-responsive">
+    <table class="table table-striped edit_profile">
+        <tr>
+            <th>username</th>
+            <td>{{ doc_obj.username }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:doc_username_ajax' %}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="username" value="{{ doc_obj.username }}" maxlength="150">
+                        </div>
+                        <input type="submit" value="save" class="btn pull-right" id="btnUsername">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>first name</th>
+            <td>{{ doc_obj.first_name }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:first_name_ajax'%}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="fname" value="{{ doc_obj.first_name }}" maxlength="30">
+                        </div>
+                        <input type="submit" value="save" class="btn btnFirstName pull-right">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>second name</th>
+            <td>{{ doc_obj.profile.second_name }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:second_name_ajax'%}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="sname" value="{{ doc_obj.profile.second_name }}" maxlength="30">
+                        </div>
+                        <input type="submit" value="save" class="btn btnSecondName pull-right">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>last name</th>
+            <td>{{ doc_obj.last_name }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:last_name_ajax'%}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="lname" value="{{ doc_obj.last_name }}" maxlength="30">
+                        </div>
+                        <input type="submit" value="save" class="btn btnLastName pull-right">
+{#                        <input type="submit" value="save" class="btn btnProfileUpdateSave pull-right">#}
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>mobile</th>
+            <td>{{ doc_obj.profile.mobile_no }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:patient_mobile_no_ajax'%}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="mobile" value="{{ doc_obj.profile.mobile_no }}" maxlength="15">
+                        </div>
+                        <input type="submit" value="save" class="btn pull-right" id="mobile_no">
+{#                        <input type="submit" value="save" class="btn btnProfileUpdateSave pull-right">#}
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+
+        <tr>
+            <th>email address</th>
+            <td>{{ doc_obj.email }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:email_ajax'%}">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="email" value="{{ doc_obj.email }}" maxlength="254">
+                        </div>
+                        <input type="submit" value="save" class="btn btnEmail pull-right">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+        <tr>
+            <th>D.O.B</th>
+            <td>{{ doc_obj.profile.birth_date }}&nbsp;<button type="button" class="btn probackground pull-right">edit</button></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <div class="basic-info">
+                    <form data-url="{% url 'doctor:dob_ajax'%}">
+                        <div class="form-group">
+                            <input id="datepicker" data-date-format='yyyy-mm-dd' class="form-control" type="text" name="dob" >
+{#                                value="{{ doc_obj.profile.birth_date }}"#}
+                        </div>
+                        <input type="submit" value="save" class="btn btnDOB pull-right">
+                    </form>
+                </div>
+            </td>
+        </tr>
+
+
+    </table>
+
+</div>

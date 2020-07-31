@@ -1,0 +1,257 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block searching %}
+
+{% endblock searching %}
+
+{% block content %}
+{#    <div class="jumbotron">#}
+        <div class="container kontent_profile_edit">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+
+{#                    <img id="profileDoctorPic" src="http://via.placeholder.com/180x180" class="img-responsive img-circle" alt="Responsive image">#}
+                    {% for instance in doc_profile_pic_sd%}
+                        <img id="profileDoctorPic" src="{{ instance.photo.url }}" class="doc_profile_xs img-rounded" alt="Responsive image">
+                        <a href="{% url 'doctor:doctor_upload_pic' %}"><button class="btn btn-primary">upload profile pic</button></a>
+                    {% empty %}
+                        <img id="profileDoctorPic" src="http://via.placeholder.com/180x180" class="img-responsive img-rounded" alt="Responsive image">
+                        <!-- Button trigger modal -->
+                        <a href="{% url 'doctor:doctor_upload_pic' %}"><button class="btn btn-primary">upload profile pic</button></a>
+
+                    {% endfor %}
+                    <div id="circle"></div>
+
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <div class="profileDoctorName hidden-xs">
+                        <h2 class="text-center">Dr. {{ doc_obj.get_full_name }}</h2>
+                        <p class="text-center">{% for instance in doc_obj.specialty_set.all %}<span class="lead">{{ instance }}</span>,&nbsp;{% endfor %}</p>
+                        <p class="text-center">{% for instance in doc_clinic %}<span class="lead">{{ instance }}</span>,&nbsp;{% endfor %}</p>
+
+                    </div>
+                    <div class="profileDoctorNameDocProfile hidden-lg hidden-md hidden-sm">
+                        <h2 class="text-center">Dr. {{ doc_obj.get_full_name }}</h2>
+                        <p class="text-center">{% for instance in doc_obj.specialty_set.all %}<span class="lead">{{ instance }}</span>,&nbsp;{% endfor %}</p>
+                         <p class="text-center">{% for instance in doc_clinic %}<span class="lead">{{ instance }}</span>,&nbsp;{% endfor %}</p>
+{#                        <p class="text-center">{{ doc_obj.specialty_set.all }}</p>#}
+
+                    </div>
+                    <div class="star-ratings doctor_profile_star_rating">
+                        <div class="fill-ratings" style="width:{{ docObjratingAVG.rating_value__avg }}%;">
+                            <span>★★★★★</span>
+                        </div>
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                    </div>
+
+                    <a href="#" id="doctor_profile_badge"><span class="badge">{{ doc_obj.doc_rated.count }} review{% if doc_obj.doc_rated.count > 1 %}s{% endif %}</span></a>
+                    <br><br>
+{#                    <p class="text-center"><a href="{% url 'doctor:uploadclinicpicsajax' %}" class="btn btn-success">Upload clinic photos</a></p>#}
+                </div>
+                <div class="col-md-4 profileDoctorName">
+
+                </div>
+            </div><!-- end of row -->
+        </div>
+{#    </div>#}
+
+        <div class="container">
+            <div class="row">
+                <hr>
+                <ul class="nav nav-pills">
+                    <li class="active" role="presentation"><a data-toggle="pill" href="#reviews">reviews</a></li>
+                    <li role="presentation"><a data-toggle="pill" href="#clinicPhotos" id="cpiks" data-url="{% url 'doctor:clinicPhotosAjax' %}">clinic photos</a></li>
+                    <li role="presentation"><a data-toggle="pill" href="#profile">profile</a></li>
+                    <li role="presentation"><a data-toggle="pill" href="#clinic">clinic</a></li>
+                    <li role="presentation"><a data-toggle="pill" href="#specialty_id">specialty</a></li>
+                </ul>
+                <hr>
+            </div><!-- end of row -->
+            <div class="row">
+                <div class="tab-content">
+                    <div id="reviews" class="tab-pane fade in active">
+                        {% for instance in reviews %}
+
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img class="media-object" src="http://via.placeholder.com/64x64" alt="...">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">{{ instance.user.username }}
+                                        <div class="star-ratings-small">
+                                        <div class="fill-ratings-small" style="width:{{ instance.rating_value }}%;">
+                                            <span>★★★★★</span>
+                                        </div>
+                                        <div class="empty-ratings">
+                                            <span>★★★★★</span>
+                                        </div>
+                                    </div>
+                                    </h4>
+                                    {{ instance.review }}
+                                    <br>
+                                    {% for doc_patient in instance.user.doc_patients.all %}
+                                        <span class="badge">verified patient</span>
+                                    {% empty %}
+                                        <span class="badge">unverified patient</span>
+                                    {% endfor %}
+                                </div>
+                                <hr>
+                            </div>
+                        {% empty %}
+                            <p>You have not been reviewed yet !!</p>
+                        {% endfor %}
+
+                    </div>
+                    <div id="clinicPhotos" class="tab-pane fade">
+
+                    </div>
+
+                    <div id="profile" class="tab-pane fade">
+
+
+                        <div class="well-sm">
+
+{#                        <div class="row">#}
+                            <div class="col-md-3">
+                                <!-- Nav tabs -->
+                                <ul class="nav nav-pills nav-stacked" role="tablist">
+                                    <li role="presentation" class="active"><a href="#basic" aria-controls="profile" role="tab" data-toggle="tab">Basic info</a></li>
+                                    <li role="presentation"><a href="#p_biography" aria-controls="messages" role="tab" data-toggle="tab">Professinal biography</a></li>
+                                    <li role="presentation"><a href="#p_background" aria-controls="p_background" role="tab" data-toggle="tab">Professional background</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="col-md-9">
+                                <!-- Tab panes -->
+                                <div class="tab-content">
+                                    <div role="tabpanel" class="tab-pane active" id="basic">
+                                        {% include 'doctor/doc_basic_info.html' %}
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="p_biography">
+                                        {% include 'doctor/professional_biography.html' %}
+                                    </div>
+                                    <div role="tabpanel" class="tab-pane" id="p_background">
+                                        {% include 'doctor/professional_background.html' %}
+                                    </div>
+                                </div>
+                            </div>
+{#                        </div>#}
+
+                        </div>
+
+                    </div>
+
+
+                    <div id="clinic" class="tab-pane fade">
+{#                        <div class="row">#}
+                            <div class="col-md-5 col-md-offset-1">
+                                <a href="{% url 'doctor:add_clinic' %}">register new clinic</a><br><br>
+                            </div>
+                            <div class="col-md-5 col-md-offset-1">
+                                {% for clinic_instance in clinics_you_own %}
+                                {#                            <a href="{% url 'doctor:edit_clinic_own' pk=clinic_instance.id %}">edit {{ clinic_instance }}</a><br>#}
+                                    <a href="{% url 'doctor:edit_clinic_own_new' pk=clinic_instance.id %}">edit {{ clinic_instance }}</a><br>
+                                {% endfor %}
+                            </div>
+{#                        </div>#}
+                        <hr>
+
+                        <hr>
+
+
+{#                        <div class="row">#}
+                            <div class="col-md-5 col-md-offset-1">
+                                <form data-url="{% url 'doctor:doc_selected_clinic_ajax' %}">
+                                    <div class="form-group">
+                                        <ul>
+                                            <li>please select here if the clinic you practice at is already registered</li>
+                                        </ul>
+                                        <label for="doctor_selected_clinic">select clinic:</label>
+                                        <select class="form-control" id="doctor_selected_clinic">
+                                            {% for instance in all_clinics %}
+                                                <option {% if instance in doc_clinic %}selected{% endif %}>{{ instance }}</option>
+                                            {% endfor %}
+                                            <option disabled selected>select clinic</option>
+                                        </select>
+                                    </div>
+                                    <input type="submit" value="save" class="btn btn-default selected_clinic">
+                                </form>
+                            </div>
+                            <div class="col-md-5">
+
+                                <form data-url="{% url 'doctor:clinic_name_ajax' %}">
+                                    <div class="form-group">
+                                        <ul>
+                                            <li>please note the selected clinics are where you practice</li>
+                                            <li>unchecking a clinic means you no longer practice there</li>
+                                        </ul>
+                                        <label for="clinic_name">clinics you practice at:</label>
+                                        <select class="form-control" id="clinic_name" multiple="multiple">
+                                            {% for instance in doc_clinic %}
+                                                <option selected>{{ instance }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <input type="submit" value="save" class="btn dokClinicName">
+                                </form>
+
+                            </div>
+{#                        </div>#}
+
+                    </div>
+                    <div id="specialty_id" class="tab-pane fade">
+{#                        <div class="row">#}
+                            <div class="col-md-5 col-md-offset-1">
+                                {% include "doctor/specialtyList.html" %}
+                            </div>
+                            <div class="col-md-5">
+                                {% include "doctor/doctorsSpecialtysList.html" %}
+                            </div>
+{#                        </div>#}
+{#                        <div class="row">#}
+                            <div class="col-md-5 col-md-offset-1">
+                                <form action="" method="post" data-url="{% url 'doctor:new_specitys_ajax' %}">
+                                    <div class="form-group">
+                                        <ul>
+                                            <li>if you can't find your specialty from the list above, add it here</li>
+                                        </ul>
+                                        <label for="enter_specialty">add specialty:</label>
+                                        <input type="text" class="form-control" name="enter_specialty" maxlength="50">
+                                    </div>
+                                    <input type="submit" value="Save" class="btn-default btn" id="new_specialty">
+                                </form>
+                            </div>
+{#                        </div>#}
+                    </div>
+
+
+            </div> <!-- end of tab content -->
+        </div> <!-- end of row -->
+
+        </div><!-- end of container -->
+
+{% endblock content %}
+
+
+{% block jquery %}
+
+    <script src="{% static 'js/my/others/doctor_profile_edit/doctor_basic_info.js' %}"></script>
+
+    <script src="{% static 'js/my/others/doctor_profile_edit/professional_biography.js'%}"></script>
+
+    <script src="{% static 'js/my/others/doctor_profile_edit/professional_background.js'%}"></script>
+
+    <script src="{% static 'js/my/others/doctor_profile_edit/doctor_profile_edit.js'%}"></script>
+
+{% endblock jquery %}
+
+
+
+
+

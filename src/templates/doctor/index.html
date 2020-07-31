@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block meta_description %}
+    Hekimadoctors is a directory for medical professionals in kenya. This is to make it easy for ordinary kenyans to
+    find doctors and clinics in a quick and easy way. In our listings we have dentists, gynecologists and many other medical
+    professionals.
+{% endblock meta_description %}
+
+{% block title %} Hekimadoctors directory for doctors, dentists, gynecologist, surgeons etc  {% endblock title %}
+
+{% block searching %}{% endblock searching %}
+
+{% block messagess %}{% endblock messagess %}
+
+{% block content %}
+
+    <div class="container kontent">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 hidden-xs">
+                <div class="homepag-container">
+{#                    <p class="site-name">Pata dakitari</p>#}
+                    <p class="homepage_description">Find doctors all over the country by seleting</p>
+                    <p class="homepage_description">their specialty and the county they practice in.</p>
+                </div>
+            </div>
+             <div class="col-xs-10 col-xs-offset-1 hidden-lg hidden-md hidden-sm">
+                <div class="xs-homepag-container">
+{#                    <p class="xs-site-name">Pata dakitari</p>#}
+                    <p class="xs_homepage_description">Find doctors all over the country by entering</p>
+                    <p class="xs_homepage_description">their specialty and the county they practice in.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+                <form class="form-inline" action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <select class="form-control search-form" name="location" class="index_specialty">
+                            <option disabled selected class="lead">select location</option>
+                            {% for instance in all_locations %}
+                                <option>{{ instance }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control search-form" name="specialty" class="index_specialty">
+                            <option disabled selected class="lead">select specialty</option>
+                            {% for instance in all_specialtys %}
+                                <option>{{ instance }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                  <button type="submit" class="btn btn-default search-form glyphicon glyphicon-search" id="index-form-width"></span></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

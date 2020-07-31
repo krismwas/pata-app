@@ -1,0 +1,286 @@
+/* ***************************************************************************
+                              GENERIC
+   ************************************************************************* */
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+.alert {
+  margin-bottom: 0px; }
+
+html {
+  height: 100%; }
+
+#wrapper {
+  min-height: 100%;
+  position: relative; }
+
+.search_doc {
+  margin-top: 100px; }
+
+#edit_image_sizes{
+  width:100px;
+  height: 100px;
+}
+
+.container-alert-flash{
+  position: fixed;
+  margin-left: 72px;
+  top: -44px;
+  z-index: 10000;
+  display: none;
+}
+
+.basic-info{
+  display: none;
+}
+/* ***************************************************************************
+                              NAVBAR
+   ************************************************************************* */
+.navbar {
+  min-height: 70px;
+  border: 0;
+  margin-bottom: 2px; }
+
+.navbar-brand {
+  line-height: 40px; }
+
+.navbar-inverse .navbar-nav > li > a {
+  display: inline-block;
+  line-height: 40px; }
+
+.kontent {
+  padding-top: 92px;
+  padding-bottom: 30px; }
+
+.formDisplay {
+  display: none; }
+
+
+
+/* ***************************************************************************
+                              COROUSEL
+   ************************************************************************* */
+.carousel {
+    margin-top: 71px;
+}
+
+/* ***************************************************************************
+                              JUMBOTRON
+   ************************************************************************* */
+.jumbotron {
+  height: 400px;
+}
+
+#profileDoctorPic{
+  margin-top: 68px;
+}
+
+.profileDoctorName{
+  margin-top: 65px;
+}
+
+.profileDoctorNameDocProfile {
+    margin-top: -12px;
+}
+
+.doc-details{
+  margin-top: -59px;
+  /*display: block;*/
+  /*position: absolute;*/
+}
+
+.doctor_profile_star_rating{
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
+#doctor_profile_badge{
+  /*margin-left: 241px;*/
+  display: block;
+  text-align: center;
+}
+
+.doc_profile_xs{
+  width: 100%;
+  display: block;
+  height: auto;
+  /*padding-top: 1px;*/
+}
+
+#pic_xs{
+  padding: 10px;
+}
+
+
+/* ************************************************************
+                        MAIN - CONTENT
+************************************************************** */
+
+.filtered_doctors_xs{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+
+#professional_bio_padding{
+  padding: 30px;
+}
+
+#reviewsbookmark{
+  padding-top: 100px;
+}
+
+.filtered_doctor_images{
+  margin-top: 4px
+  /*width: 180px;*/
+  /*height: 150px;*/
+}
+
+.search-form{
+  height: 60px;
+  border-radius:0px;
+  font-size: 20px;
+}
+
+#index-form-width{
+  width: 55px;
+}
+
+.site-name{
+  /*color:red ;*/
+  font-size: 25px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/*.xs-site-name{*/
+  /*color:red ;*/
+  /*font-size: 33px;*/
+  /*font-weight: bold;*/
+/*}*/
+
+.xs-homepag-container{
+  padding-top: 4px;
+}
+
+.homepage_description{
+  font-size: 300%;
+  /*color: rgba(0, 0, 0, 0.7)*/
+  /*color: rgb(105,105,100)*/
+  color: rgb(128,128,128)
+}
+
+.xs_homepage_description{
+  font-size: 200%;
+  color: rgba(0, 0, 0, 0.7)
+
+}
+
+.homepag-container{
+  padding-top: 67px;
+}
+
+
+.kontent_profile_edit{
+  margin-top: 40px;
+  padding-bottom: 95px;
+}
+
+
+
+#filtered_doc_image{
+  margin-left: 0px;
+  margin-top: -4px;
+}
+
+.alert {
+  margin-top: 72px;
+  /*margin-bottom: 1px;*/ }
+
+#content {
+  padding-top: 0px;
+  padding-bottom: 400px;
+  /* Height of the footer element */ }
+
+.center-block {
+  display: block; }
+
+.images-homepage {
+  height: 250px;
+  width: 250px; }
+
+.images-doctors {
+  /*height: 120px;*/
+  /*width: 120px;*/
+  /*!*height: 101px;*!*/
+  /*!*width: 166px;*!*/
+  /*display: inline-block; */
+}
+
+.images-doctors_profile {
+  height: 250px;
+  width: 250px;
+  display: inline-block; }
+
+.container_for_city_images {
+  position: relative; }
+
+.centered_txt_on_top_of_image {
+  position: absolute;
+  left: 0;
+  top: 45%;
+  width: 100%;
+  text-align: center;
+  font-size: 25px;
+  color: white;
+  font-weight: bold; }
+
+/*#reviews {*/
+  /*margin-top: 20px;*/
+/*}*/
+
+
+.well{
+  margin-bottom: 10px;
+}
+
+/*.python_display_message{*/
+  /*position: fixed;*/
+/*}*/
+
+/* ************************************************************
+FOOTER
+************************************************************** */
+footer {
+  background-color: #222;
+  /*padding: 80px 0px;*/
+  padding: 70px 0px;
+  margin-top: 0px;
+  /*height: 323px;*/
+  /*height: 350px;*/
+
+  /*height: 250px;*/
+  /*height: 369px;*/
+}
+
+footer a {
+  display: block;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8em; }
+
+footer h4 {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 1.3em; }
+
+footer a:hover {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none; }
+
+footer hr {
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: 10px 0; }
+
+footer a span {
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.3); }
+
+

@@ -1,0 +1,471 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{#{% block title %} doctor profile {% endblock title %}#}
+
+{% block meta_description %}
+    Hekimadoctors is a directory for medical professionals in kenya. This is to make it easy for ordinary kenyans to
+    find doctors and clinics in a quick and easy way. In our listings we have dentists, gynecologists and many other
+    medical professionals
+{% endblock meta_description %}
+
+{% block title %}
+    Hekimadoctors is kenya medical doctors directory, find {{ doc_object.specialty_set.all.first }}s, in
+    {{ doc_object.profile.doc_location }}
+{% endblock title %}
+
+{% block content %}
+{#  <div class="jumbotron"> #}
+
+    <!-- ########################################################################################################### -->
+    <!-- for extra small devices -->
+    <!-- ########################################################################################################### -->
+
+
+    <div class="container visible-xs-block" id="pic_xs">
+        <div class="row">
+            <div class="col-xs-12">
+{#                    <img style="padding: 2px" id="profileDoctorPic" src="http://via.placeholder.com/180x180" class="img-responsive img-circle" alt="Responsive image">#}
+{#                    <div id="circle"></div>#}
+{#                        <img style="padding: 2px" id="profileDoctorPic" src="{{ sd_profile_pic.photo.url }}" class="img-responsive img-circle" alt="Responsive image">#}
+                <div>
+                    {% for instance in sd_profile_pic%}
+{#                            <div style="padding: 10px">#}
+                        <a href="{{ instance.photo.url }}"><img id="profileDoctorPic" src="{{ instance.photo.url }}" class="doc_profile_xs" alt="Responsive image"></a>
+{#                            </div>#}
+                    {% endfor %}
+                </div>
+            </div>
+        </div><!-- end of row -->
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="doc-details">
+                    <div class="profileDoctorName">
+                        <h2 class="text-center">Dr. {{ object.get_full_name }}</h2>
+                        <p class="text-center">{{ object.profile.specialty }}</p>
+
+                    </div>
+                     <div class="star-ratings
+                     doctor_profile_star_rating">
+                        <div class="fill-ratings" style="width:{{ rating_pentage_avg }}%;">
+                            <span>★★★★★</span>
+                        </div>
+                        <div class="empty-ratings">
+                            <span>★★★★★</span>
+                        </div>
+                     </div>
+                </div>
+
+                <a href="#reviewsbookmark" id="doctor_profile_badge"><span class="badge">{{ object.doc_rated.count }} review{% if object.doc_rated.count > 1 %}s{% endif %}</span></a>
+                <br>
+{#                {% if object.clinic_set %}#}
+{#                    <p class="text-center"><a href="{% url 'doctor:clinic_photos' id=object.id %}">clinic photos</a></p>#}
+{#                {% endif %}#}
+                    {% for instance in doctor_clinics %}
+                        <p class="text-center lead"><a href="{% url 'doctor:clinic_photos' id=instance.id %}">{{ instance }}</a></p>
+                    {% endfor %}
+                    <p class="text-center lead"><a href="{% url 'book_appointment:bappointment' id=object.id %}">Book appointment</a></p>
+
+
+
+
+
+            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingOne">
+                  <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                      Education
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                  <div class="panel-body">
+                    {{ object.profile.education }}
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingTwo">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                      Specialty
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+                  <div class="panel-body">
+                      {{ object.profile.specialty }}
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingThree">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                      Professional membership
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+                  <div class="panel-body">
+                      {{ object.profile.professional_membership }}
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingfour">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefour" aria-expanded="false" aria-controls="collapseThree">
+                      Board certifications
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapsefour" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfour">
+                  <div class="panel-body">
+                      {{ object.profile.board_certifications }}
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading" role="tab" id="headingfive">
+                  <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapsefive" aria-expanded="false" aria-controls="collapseThree">
+                      professional awards
+                    </a>
+                  </h4>
+                </div>
+                <div id="collapsefive" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingfive">
+                  <div class="panel-body">
+                      {{ object.profile.professional_awards }}
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+
+
+
+
+
+{#                    </div> <!-- end doc-details -->#}
+            </div>
+{#                <div class="col-xs-12">#}
+{##}
+{#                </div>#}
+        </div><!-- end of row -->
+    </div><!-- end of container -->
+
+{#    </div><!--  end of jumbotron -->#}
+
+
+
+
+
+
+    <!-- ########################################################################################################### -->
+    <!-- for pc's -->
+    <!-- ########################################################################################################### -->
+    <div class="jumbotron hidden-xs">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-3 col-sm-4">
+    {#                    <img style="padding: 2px" id="profileDoctorPic" src="http://via.placeholder.com/180x180" class="img-responsive img-circle" alt="Responsive image">#}
+    {#                    <div id="circle"></div>#}
+    {#                        <img style="padding: 2px" id="profileDoctorPic" src="{{ sd_profile_pic.photo.url }}" class="img-responsive img-circle" alt="Responsive image">#}
+                    {% if sd_profile_pic%}
+                        {% for instance in sd_profile_pic%}
+    {#                            <div style="padding: 10px">#}
+                            <a href="{{ instance.photo.url }}"><img id="profileDoctorPic" src="{{ instance.photo.url }}" class="img-responsive img-rounded" alt="Responsive image"></a>
+    {#                            </div>#}
+                        {% endfor %}
+                    {% else %}
+                        <img style="padding: 2px" id="profileDoctorPic" src="http://via.placeholder.com/180x180" class="img-responsive img-circle" alt="Responsive image">
+
+                    {% endif %}
+
+                </div>
+                <div class="col-lg-5 col-md-5 col-sm-4">
+    {#                    <div class="doc-details">#}
+                    <div class="profileDoctorName">
+                        <h2 class="text-center">Dr. {{ object.get_full_name }}</h2>
+                        <p class="text-center">{% for instance in object.specialty_set.all %}{{ instance }},&nbsp;{% endfor %}</p>
+                    </div>
+                     <div class="star-ratings_sm_md_lg doctor_profile_star_rating">
+                        <div class="fill-ratings_sm_md_lg" style="width:{{ rating_pentage_avg }}%;">
+                            <span>★★★★★</span>
+                        </div>
+                        <div class="empty-ratings_sm_md_lg">
+                            <span>★★★★★</span>
+                        </div>
+                     </div>
+    {#                    </div>#}
+                    <a href="#reviewsbookmark" id="doctor_profile_badge"><span class="badge">{{ object.doc_rated.count }} review{% if object.doc_rated.count > 1 %}s{% endif %}</span></a>
+                    <br>
+
+                    {% for instance in doctor_clinics %}
+                        <p class="text-center"><a href="{% url 'doctor:clinic_photos' id=instance.id %}">{{ instance }}</a></p>
+                    {% endfor %}
+{#                    {% if object.clinic_set %}#}
+{#                        <p class="text-center"><a href="{% url 'doctor:clinic_photos' id=object.id %}">clinic photos</a></p>#}
+{#                    {% endif %}#}
+                        <p class="text-center"><a href="{% url 'book_appointment:bappointment' id=object.id %}">Book appointment</a></p>
+    {#                    </div> <!-- end doc-details -->#}
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-4">
+
+                </div>
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+
+    </div><!--  end of jumbotron -->
+
+    <div class="container">
+        <!-- profession biography -->
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1 visible-md visible-lg">
+                 <!-- Nav tabs -->
+                 <ul class="nav nav-tabs" role="tablist">
+                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Professional background</a></li>
+                     <li role="presentation"><a href="#pbio" aria-controls="messages" role="tab" data-toggle="tab">professional biography</a></li>
+{#                     <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Settings</a></li>#}
+                 </ul>
+
+                  <!-- Tab panes -->
+                  <div class="tab-content">
+                      <div role="tabpanel" class="tab-pane active" id="home">
+                          <!-- style="width:100%" -->
+                          <div class="table-responsive">
+                              <table class="table table-striped">
+                                  <tr class="danger">
+                                      <th>Education</th>
+                                      <td>{{ object.profile.education }}</td>
+                                  </tr>
+                                  <tr class="warning">
+                                      <th>Specialty</th>
+                                      <td>{{ object.profile.specialty }}</td>
+                                  </tr>
+                                   <tr class="success">
+                                      <th>Professional membership</th>
+                                      <td>{{ object.profile.professional_membership }}</td>
+                                  </tr>
+                                  <tr class="warning">
+                                      <th>board certifications</th>
+                                      <td>{{ object.profile.board_certifications }}</td>
+                                  </tr>
+                                  <tr class="info">
+                                      <th>professional awards</th>
+                                      <td>{{ object.profile.professional_awards }}</td>
+                                  </tr>
+                              </table>
+                          </div>
+                      </div>
+{#                      <div role="tabpanel" class="tab-pane" id="profile">...</div>#}
+                      <div role="tabpanel" class="tab-pane fade" id="pbio">
+                        {% if object.profile.professional_biography %}
+                            <p id="professional_bio_padding">{{ object.profile.professional_biography }}</p>
+                        {% elif request.user.id == object.id %}
+                            <p>You dont have a professional biography yet !!</p>
+                        {% else %}
+                            <p>no professional biography yet !!</p>
+                        {% endif %}
+
+                      </div>
+{#                      <div role="tabpanel" class="tab-pane" id="settings">...</div>#}
+                  </div>
+            </div><!-- end of col -->
+
+        </div><!-- end of row -->
+    <div class="row" id="reviews">
+        <div class="col-md-12">
+
+            {% if request.user.id != object.id %}
+                <div class="col-md-offset-1 col-md-10 well">
+{#                    <div style="padding-right: 307px">#}
+                    <h4>Rate:</h4>
+                    <form class="rating" data-url="{% url 'doctor:ajax_rating' %}" doc_id="{{ object.id }}">
+                        <label title="20">
+                            <input type="radio" name="stars" value="20" />
+                            <span class="icon">★</span>
+                        </label>
+                        <label title="40">
+                            <input type="radio" name="stars" value="40" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label title="60">
+                            <input type="radio" name="stars" value="60" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label title="80">
+                            <input type="radio" name="stars" value="80" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                        <label title="100">
+                            <input type="radio" name="stars" value="100" />
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                            <span class="icon">★</span>
+                        </label>
+                    </form>
+
+                    <div>
+
+                    <form action="" method="post" class="review" data-url="{% url 'doctor:ajax_review_msg' %}" doc_id="{{ object.id }}">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <textarea class="form-control" rows="3"
+                              placeholder="{% if request.user.is_authenticated and rating_yangu %}
+                                {{ request.user }} you can update you review{% elif request.user.is_authenticated and not rating_yangu %}
+                                {{ request.user }} you have no review for this doctor{% elif not request.user.is_authenticated %}write a review
+                                    {% endif %}" name="reviewtxt" required></textarea>
+                        </div>
+                        <input type="submit" value="save"class="btn">
+                    </form>
+
+            {% endif %}
+                    <hr>
+    {#                <br>#}
+
+                </div>
+
+                    <!--my review -->
+                    <h4 id="reviewsbookmark">reviews</h4>
+                    {% if request.user.is_authenticated and rating_yangu %}
+                        <div class="media">
+                            <div class="media-left">
+
+                                <a href="#">
+                                    <img class="media-object" src="http://via.placeholder.com/64x64" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+                                <h4 class="media-heading">{% if request.user.id != object.id %}<span>You</span></span>{% endif %}
+                                    <div class="star-ratings-small">
+                                    <div class="fill-ratings-small" style="width:{% for instance in rating_yangu %}{{ instance.rating_value }}{% endfor %}%;">
+                                        <span>★★★★★</span>
+                                    </div>
+                                    <div class="empty-ratings">
+                                        <span>★★★★★</span>
+                                    </div>
+
+                                </div>
+                                </h4>
+                                 <span>{% for instance in rating_yangu %}{{ instance.timestamp }}{% endfor %}</span><br>
+                        {#                            {% if instance.review.exists %}{{ instance.review }}{% else %}<p>You have not written a review yet</p>{% endif %}#}
+                                    {% for instance in rating_yangu %}{{ instance.review }}{% endfor %}
+                                    <hr>
+                            </div>
+                        </div>
+                    {% endif %}
+                    <!-- end of my review -->
+
+    {#                {% if not request.user.id != object.id %}#}
+    {#                    <h4 id="reviewsbookmark">reviews</h4>#}
+    {#                    <hr>#}
+    {#                {% endif %}#}
+
+                     {% for instance in all_reviews %}
+                        <div class="media">
+                            <div class="media-left">
+                                <a href="#">
+                                    <img class="media-object" src="http://via.placeholder.com/64x64" alt="...">
+                                </a>
+                            </div>
+                            <div class="media-body">
+    {#                            <h4 class="media-heading">{% if request.user.is_authenticated and request.user.username == instance.user.username and request.user.id != object.id %}<span>You</span>{% else %}<span>{{ instance.user.username }}</span>{% endif %}#}
+                                 <h4 class="media-heading"><span>{{ instance.user.username }}&nbsp;</span>
+                                <div class="star-ratings-small">
+                                    <div class="fill-ratings-small" style="width:{{ instance.rating_value }}%;">
+                                        <span>★★★★★</span>
+                                    </div>
+                                    <div class="empty-ratings">
+                                        <span>★★★★★</span>
+                                    </div>
+
+                                </div>
+                                </h4>
+                                 <span>{{ instance.timestamp }}</span><br>
+    {#                            {% if instance.review.exists %}{{ instance.review }}{% else %}<p>You have not written a review yet</p>{% endif %}#}
+                                    <span>{{ instance.review }}</span>
+                                    <br>
+                                    <br>
+                                    {% for doc_patient in instance.user.doc_patients.all %}
+                                       <span class="badge">verified patient</span><br><br>
+                                    {% empty %}
+                                        <span class="badge">unverified patient</span><br>
+                                    {% endfor %}&nbsp;
+
+
+                                    {% if instance.doctorreviewopinioncount_set.count == 1 %}
+                                        {% for opinion_instance in instance.doctorreviewopinioncount_set.all %}
+                                            {% if opinion_instance.patient == request.user %}
+                                                You found this helpful.
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if instance.doctorreviewopinioncount_set.count == 1 %}
+                                        {% for opinion_instance in instance.doctorreviewopinioncount_set.all %}
+                                            {% if not opinion_instance.patient == request.user %}
+                                                <span class="badge">{{ instance.doctorreviewopinioncount_set.count }}</span>
+                                                 person found this helpful.
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                    {% if instance.doctorreviewopinioncount_set.count > 1 %}
+                                        <span class="badge">{{ instance.doctorreviewopinioncount_set.count }}</span>
+                                        people found this helpful.
+                                    {% endif %}
+
+
+                                     Was this helpful ?&nbsp;&nbsp;
+                                        <button data-url="{% url 'doctor:helpful_count_ajax' %}" class="btn btn-default helpful" value="{{ instance.id }}">yes</button>
+                                        &nbsp;<button data-url="{% url 'doctor:no_ajax' %}" class="btn btn-default no" value="{{ instance.id }}">no</button>&nbsp;
+                                        {% if instance.user not in instance.reportedabuse_set.all %}
+                                            <button data-url="{% url 'doctor:report_abuse_ajax' %}" class="btn btn-default abuse" value="{{ instance.id }}">report abuse</button>
+                                        {% endif %}
+
+                                    <hr>
+                            </div>
+                        </div>
+                    {% empty %}
+                         {% if request.user.id == object.id %}
+                             <p>you have not been reviewed yet !!</p>
+                         {% elif not request.user.rating_set.all %}
+                            <p>No reviews for this doctor yet !!</p>
+                            <p>be the first one to review</p>
+                         {% endif %}
+
+                    {% endfor %}
+            </div>
+        </div> <!-- end of col -->
+        <div class="col-md-6">
+
+        </div>
+{#        </div><!-- end of content padding -->#}
+    </div>
+    </div>
+{% endblock content %}
+
+
+{% block jquery %}
+
+    <script src="{% static 'js/my/others/doctor_profile_detail.js' %}"></script>
+
+{% endblock jquery %}
+
+
+
+
+
+
+

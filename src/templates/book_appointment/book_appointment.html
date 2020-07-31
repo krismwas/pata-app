@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% load get_thumbnails %}
+
+{% load static %}
+
+{% block searching %}
+{% endblock searching %}
+
+{% block content %}
+    <div class="row kontent">
+        <div class="col-md-8 col-md-offset-2 well">
+    {#                <img src="{{ doc_obj.profile.photo.url }}" class="img-responsive" alt="Responsive image">#}
+            {% if doc_obj.profile.photo %}
+                <img src="{{ doc_obj.profile|get_thumbnails:"sd" }}" class="img-responsive" alt="Responsive image">
+            {% else %}
+                <p>no profile picture yet!!</p>
+            {% endif %}
+
+            <br>
+            <a href="{{ doc_obj.profile.get_absolute_url }}">Dr {{ doc_obj.get_full_name }}</a>
+            <br><br>
+            <form class="form-inline" action="" method="post" id="doc_appointment">
+                {% csrf_token %}
+                <div class="form-group">
+                    <lable for="datepicker">Book appointment:</lable>
+                    <input type="text" id="datepicker" data-date-format='yyyy-mm-dd' class="form-control" placeholder="Please select date to see doctor", name="date_entered">
+
+                </div>
+                <input type="submit" value="submit" class="btn btn-success">
+            </form>
+        </div>
+
+    </div>
+
+{% endblock content %}
+
+
+{% block jquery %}
+
+    <script src="{% static 'js/my/others/book_appointment.js' %}"></script>
+
+{% endblock jquery %}

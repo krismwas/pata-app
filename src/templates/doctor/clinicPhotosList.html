@@ -1,0 +1,46 @@
+{% for clinic_instance in clinics %}
+{#    <p>{{ clinic_photos_instance.clinic }}</p>#}
+    <div class="col-md-12">
+        <span class="lead">{{ clinic_instance }} pics </span><span>
+        <a href="{% url 'doctor:uploadclinicpicsajax' id=clinic_instance.id %}">upload clinic photos</a></span><br>
+        {% if not clinic_instance.clinicphotos_set.all.exists %}
+    {#        <div class="col-md-12">#}
+                <p>you have not uploaded clinic photos yet !!</p>
+    {#        </div>#}
+        {% endif %}
+    </div>
+    <br><br>
+    {% for clinic_photos_instance in clinic_instance.clinicphotos_set.all %}
+        <div class="col-xs-6 col-md-3">
+            <a href="{{ instance.clinic_photos_thumbnails_micro }}" class="thumbnail">
+                <img src="{{ clinic_photos_instance.clinic_photos_thumbnails_micro }}">
+            </a>
+        </div>
+    {% endfor %}
+    <hr><hr>
+
+{% endfor %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

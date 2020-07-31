@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+  pata:
+    build:
+      context: ./
+      dockerfile: Dockerfile.prod
+#    image: chrismwas/hospital-images:hospital-img
+    command: gunicorn pata.wsgi:application --bind 0.0.0.0:8000
+    container_name: pata
+    volumes:
+      - static_volume:/vol/web/staticfiles
+      - media_volume:/vol/web/mediafiles
+    expose:
+      - 8000
+    restart: always
+    environment:
+      - SECRET_KEY=${SECRET_KEY} SECRET_KEY
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - DEBUG=${DEBUG}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+
+      - DB_HOST=${DB_HOST}
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASS=${POSTGRES_PASSWORD}
+      - DB_ENGINE=${DB_ENGINE}
+#    networks:
+#      - app-network
+
+    depends_on:
+      - pata_db
+  pata_db:
+    image: postgres:12.3-alpine
+    container_name: pata_db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+#    networks:
+#      - app-network
+
+  nginx:
+    build: ./nginx
+#    image: chrismwas/hospital-images:nginx-img
+    container_name: nginx
+    ports:
+      - "1337:80"
+
+    restart: always
+    volumes:
+      - static_volume:/vol/web/staticfiles
+      - media_volume:/vol/web/mediafiles
+      - ./nginx:/etc/nginx/conf.d
+#      - certbot-etc:/etc/letsencrypt
+#      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - pata
+#    networks:
+#      - app-network
+
+#  certbot:
+#    image: certbot/certbot
+#    container_name: certbot
+#    volumes:
+#      - certbot-etc:/etc/letsencrypt
+#      - certbot-var:/var/lib/letsencrypt
+#      - static_volume:/vol/web/staticfiles
+#    depends_on:
+#      - nginx
+#    command: certonly --webroot --webroot-path=/vol/web/staticfiles --email krismwasgit@gmail.com --agree-tos --no-eff-email --staging -d nairobidoc.co.ke
+
+volumes:
+  postgres_data:
+  media_volume:
+  static_volume:
+#    driver: local
+#    driver_opts:
+#      type: none
+#      device: /home/mwangi/hospital-app/src/static/
+#      o: bind
+
+#networks:
+#  app-network:
+#    driver: bridge
+
+

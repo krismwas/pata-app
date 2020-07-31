@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block searching %}{% endblock searching %}
+
+{% block content %}
+    <div class="container kontent">
+        <div class="row">
+            <div class="col-lg-offset-2 col-lg-8 col-md-offset-2 col-md-8 col-sm-12 col-xs-12">
+                 <form method="post" action="">
+                {% csrf_token %}
+                <legend>Please enter the details below</legend>
+                <p>This will enable us to contact you.</p>
+                {{ form|crispy }}
+                <input type="submit" value="Submit" class="btn btn-success">
+            </form>
+            </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,245 @@
+/*percentage star rating*/
+.star-ratings {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 30px;
+  position: relative;
+  /*margin: 0;*/
+  margin-left: 188px;
+  margin-top: -11px;
+  padding: 0;
+}
+.star-ratings .fill-ratings {
+  color: #e7711b;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-ratings .fill-ratings span {
+  display: inline-block;
+}
+.star-ratings .empty-ratings {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+
+/*percentage star rating for small font*/
+
+/*percentage star rating*/
+.star-ratings-small {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 22px;
+  position: relative;
+  /*margin: 0;*/
+  /*margin-left: 66px;*/
+  display: inline-block;
+  margin-top: -22px;
+  padding: 0;
+}
+.star-ratings-small .fill-ratings-small {
+  color: #e7711b;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-ratings-small .fill-ratings-small span {
+  display: inline-block;
+}
+.star-ratings-small .empty-ratings {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+
+
+
+
+/* ***************************************************************************
+          css star rating for small medium and large devices
+   ************************************************************************* */
+
+/*percentage star rating*/
+.star-ratings_sm_md_lg {
+  unicode-bidi: bidi-override;
+  color: #ccc;
+  font-size: 30px;
+  position: relative;
+  /*margin: 0;*/
+  margin-left: 188px;
+  margin-top: -11px;
+  padding: 0;
+}
+.star-ratings_sm_md_lg .fill-ratings_sm_md_lg {
+  color: #e7711b;
+  padding: 0;
+  position: absolute;
+  z-index: 1;
+  display: block;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+}
+.star-ratings_sm_md_lg .fill-ratings_sm_md_lg span {
+  display: inline-block;
+}
+.star-ratings_sm_md_lg .empty-ratings_sm_md_lg {
+  padding: 0;
+  display: block;
+  z-index: 0;
+}
+
+
+/* ***************************************************************************
+           end of css star rating for small medium and large devices
+   ************************************************************************* */
+
+.rating {
+  display: inline-block;
+  position: relative;
+  height: 50px;
+  line-height: 50px;
+  font-size: 27px;
+    margin-top: -17px;
+}
+
+.rating label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  cursor: pointer;
+    font-weight: 100;
+}
+
+.rating label:last-child {
+  position: static;
+}
+
+.rating label:nth-child(1) {
+  z-index: 5;
+}
+
+.rating label:nth-child(2) {
+  z-index: 4;
+}
+
+.rating label:nth-child(3) {
+  z-index: 3;
+}
+
+.rating label:nth-child(4) {
+  z-index: 2;
+}
+
+.rating label:nth-child(5) {
+  z-index: 1;
+}
+
+.rating label input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+}
+
+.rating label .icon {
+  float: left;
+  color: transparent;
+}
+
+.rating label:last-child .icon {
+  color: #ddd;
+}
+
+.rating:not(:hover) label input:checked ~ .icon,
+.rating:hover label:hover input ~ .icon {
+  color: #FFD700;
+}
+
+.rating label input:focus:not(:checked) ~ .icon:last-child {
+  color: #000;
+  text-shadow: 0 0 5px #09f;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*.rating {*/
+    /*float:left;*/
+/*}*/
+
+/*!* :not(:checked) is a filter, so that browsers that don’t support :checked don’t*/
+   /*follow these rules. Every browser that supports :checked also supports :not(), so*/
+   /*it doesn’t make the test unnecessarily selective *!*/
+/*.rating:not(:checked) > input {*/
+    /*position:absolute;*/
+    /*top:-9999px;*/
+    /*clip:rect(0,0,0,0);*/
+/*}*/
+
+/*.rating:not(:checked) > label {*/
+    /*float:right;*/
+    /*width:1em;*/
+    /*padding:0 .1em;*/
+    /*overflow:hidden;*/
+    /*white-space:nowrap;*/
+    /*cursor:pointer;*/
+    /*font-size:200%;*/
+    /*line-height:1.2;*/
+    /*color:#ddd;*/
+    /*text-shadow:1px 1px #bbb, 2px 2px #666, .1em .1em .2em rgba(0,0,0,.5);*/
+/*}*/
+
+/*.rating:not(:checked) > label:before {*/
+    /*content: '★ ';*/
+/*}*/
+
+/*.rating > input:checked ~ label {*/
+    /*color: #f70;*/
+    /*text-shadow:1px 1px #c60, 2px 2px #940, .1em .1em .2em rgba(0,0,0,.5);*/
+/*}*/
+
+/*.rating:not(:checked) > label:hover,*/
+/*.rating:not(:checked) > label:hover ~ label {*/
+    /*color: gold;*/
+    /*text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);*/
+/*}*/
+
+/*.rating > input:checked + label:hover,*/
+/*.rating > input:checked + label:hover ~ label,*/
+/*.rating > input:checked ~ label:hover,*/
+/*.rating > input:checked ~ label:hover ~ label,*/
+/*.rating > label:hover ~ input:checked ~ label {*/
+    /*color: #ea0;*/
+    /*text-shadow:1px 1px goldenrod, 2px 2px #B57340, .1em .1em .2em rgba(0,0,0,.5);*/
+/*}*/
+
+/*.rating > label:active {*/
+    /*position:relative;*/
+    /*top:2px;*/
+    /*left:2px;*/
+/*}*/

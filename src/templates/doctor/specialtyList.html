@@ -1,0 +1,15 @@
+<form action="" method="post" data-url="{% url 'doctor:doctor_specialty_selected_ajax' %}">
+       <div class="form-group">
+            <ul>
+                <li>please use this to select your specialty</li>
+            </ul>
+            <label for="specialty_all">specialtys:</label>
+            <select class="form-control" id="specialty_selected">
+                <option disabled selected>select specialty</option>
+                {% for instance in all_specialtys %}
+                    <option>{{ instance }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    <input type="submit" value="Save" class="btn-default btn" id="all_specialtys">
+</form>

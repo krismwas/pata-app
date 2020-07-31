@@ -1,0 +1,244 @@
+/* ***************************************************************************
+                              GENERIC
+   ************************************************************************* */
+.alert {
+    margin-bottom: 0px;
+}
+
+html {
+    height:100%;
+}
+
+#wrapper {
+    min-height:100%;
+	position:relative;
+}
+
+.search_doc {
+    margin-top: 100px;
+}
+
+
+/* ***************************************************************************
+                              NAVBAR
+   ************************************************************************* */
+.navbar {
+    min-height: 70px;
+    border: 0;
+    margin-bottom: 2px;
+
+}
+
+.navbar-brand {
+    line-height: 40px;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    display: inline-block;
+    line-height: 40px;
+}
+
+.kontent {
+    padding-top: 92px;
+    padding-bottom: 30px;
+
+}
+
+.formDisplay {
+    display: none;
+}
+
+
+/* ***************************************************************************
+                              JUMBOTRON
+   ************************************************************************* */
+
+/* Move down content because we have a fixed navbar that is 50px tall */
+
+body {
+    /*padding-top: 70px;*/
+    /*padding-top: 70px;*/
+    padding-bottom: 0px;
+    height: 100px;
+}
+
+.jumbotron {
+    height: 500px;
+    background-image: url("../img/dark_embroidery.png");
+    padding: 70px 0px;
+    margin-top: 2px;
+    margin-bottom: 0px;
+}
+
+.jumbotron form {
+    padding-top: 330px;
+
+}
+
+.jumbotron .form-control {
+    height: 60px;
+    width: 336px;
+
+}
+
+.jumbotron .btn {
+    line-height: 3.428571;
+
+}
+
+
+/* ************************************************************
+MAIN - CONTENT
+************************************************************** */
+
+.alert {
+    margin-top: 72px;
+    /*margin-bottom: 1px;*/
+}
+
+#content {
+    padding-top: 0px;
+    padding-bottom:400px; /* Height of the footer element */
+}
+
+
+.center-block {
+  display: block;
+
+}
+
+
+.images-homepage {
+    height: 250px;
+    width: 250px;
+
+}
+.images-doctors {
+    height: 120px;
+    width: 120px;
+    display: inline-block;
+}
+
+.images-doctors_profile {
+    height: 250px;
+    width: 250px;
+    display: inline-block;
+}
+
+.container_for_city_images {
+    position: relative;
+
+}
+
+.centered_txt_on_top_of_image {
+    position: absolute;
+    left: 0;
+    top: 45%;
+    width: 100%;
+    text-align: center;
+    font-size: 25px;
+    color: white;
+    font-weight : bold;
+
+}
+
+
+
+
+/* ************************************************************
+FOOTER
+************************************************************** */
+footer {
+    background-color: #222;
+    padding: 80px 0px;
+    margin-top: 0px;
+    height: 250px;
+}
+
+footer a {
+    display: block;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.8em;
+}
+
+footer h4 {
+    color: rgba(255,255,255,0.8);
+    font-size: 1.3em;
+}
+
+footer a:hover {
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+}
+
+footer hr {
+    border-color: rgba(255,255,255,0.1);
+    margin: 10px 0;
+}
+
+footer a span {
+    font-weight: bold;
+    color: rgba(255,255,255,0.3);
+}
+
+
+/* ************************************************************
+this is css for hearts
+************************************************************** */
+@import url(https://fonts.googleapis.com/css?family=Architects+Daughter);
+//body {
+//  font-family: 'Architects Daughter';
+//  background: #222;
+//  color: #fff;
+//  font-size: 2em;
+//}
+
+hearts {
+  position: relative;
+  display: inline-block;
+  height: 6rem;
+  width: 30rem;
+  overflow: hidden;
+}
+hearts label {
+  position: relative;
+  float: right;
+  height: 4rem;
+  width: 4rem;
+  margin: 1rem;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  cursor: pointer;
+}
+hearts label:hover:before, hearts label:hover:after, hearts label:hover ~ label:before, hearts label:hover ~ label:after {
+  background: #555;
+}
+hearts label:before, hearts label:after {
+  position: absolute;
+  top: -0.6666666667rem;
+  left: 0.8rem;
+  content: '';
+  display: block;
+  height: 4rem;
+  width: 2.2857142857rem;
+  background: #333;
+  border-radius: 2.2857142857rem 2.2857142857rem 0 0;
+  -webkit-transform-origin: 50% 72.5%;
+          transform-origin: 50% 72.5%;
+}
+hearts label:before {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+hearts label:after {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+hearts input {
+  position: absolute;
+  top: 0;
+  left: -4rem;
+}
+hearts input:checked ~ label:before, hearts input:checked ~ label:after {
+  background: #d31;
+}

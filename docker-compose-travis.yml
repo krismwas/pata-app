@@ -1,0 +1,56 @@
+version: '3'
+
+services:
+  hospital:
+    build:
+      context: ./
+      dockerfile: Dockerfile.prod
+    command: >
+      sh -c "python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - static_volume:/vol/web/staticfiles
+      - media_volume:/vol/web/mediafiles
+    expose:
+      - 8000
+    environment:
+      - SECRET_KEY=${SECRET_KEY}
+      - EMAIL_HOST_PASSWORD=${EMAIL_HOST_PASSWORD}
+      - EMAIL_PORT=${EMAIL_PORT}
+      - EMAIL_HOST_USER=${EMAIL_HOST_USER}
+      - EMAIL_HOST=${EMAIL_HOST}
+      - DEBUG=${DEBUG}
+      - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
+
+      - DB_HOST=db
+      - DB_NAME=${POSTGRES_DB}
+      - DB_USER=${POSTGRES_USER}
+      - DB_PASS=${POSTGRES_PASSWORD}
+
+    depends_on:
+      - db
+  db:
+    build:
+      context: ./db
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=${POSTGRES_DB}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+
+  nginx:
+    build: ./nginx
+    volumes:
+      - static_volume:/vol/web/staticfiles
+      - media_volume:/vol/web/mediafiles
+    ports:
+      - 1337:80
+    depends_on:
+      - hospital
+
+volumes:
+  postgres_data:
+  static_volume:
+  media_volume:
