@@ -22,10 +22,11 @@ services:
       - DEBUG=${DEBUG}
       - DJANGO_ALLOWED_HOSTS=${DJANGO_ALLOWED_HOSTS}
 
-      - DB_HOST=db
+      - DB_HOST=${DB_HOST}
       - DB_NAME=${POSTGRES_DB}
       - DB_USER=${POSTGRES_USER}
       - DB_PASS=${POSTGRES_PASSWORD}
+      - DB_ENGINE=${DB_ENGINE}
 
     depends_on:
       - db
